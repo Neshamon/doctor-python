@@ -14,11 +14,13 @@
       devShells = forEachSupportedSystem ({ pkgs }: {
         default = pkgs.mkShell {
           venvDir = ".venv";
-          packages = with pkgs; [ python313 sqlite ] ++
+          packages = with pkgs; [ python313 sqlite basedpyright ] ++
             (with pkgs.python313Packages; [
               pip
               django
               flask
+              fastapi
+              fastapi-cli
               pandas
               celery
               venvShellHook
