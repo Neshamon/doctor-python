@@ -17,8 +17,8 @@
           packages = with pkgs; [ python313 sqlite basedpyright ] ++
             (with pkgs.python313Packages; [
               pip
-              django
-              flask
+              requests
+              jinja2
               fastapi
               fastapi-cli
               pandas
