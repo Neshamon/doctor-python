@@ -21,7 +21,7 @@
               jinja2
               fastapi
               fastapi-cli
-              tailwindcss
+              tailwindcss_4
               pandas
               celery
               venvShellHook
