@@ -1,9 +1,11 @@
-from fastapi import FastAPI, APIRouter, Request
+import requests as r
+from typing import Annotated, Union
+from fastapi import FastAPI, APIRouter, Request, Header, Form
+from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-import requests as r
 
-templates = Jinja2Templates(directory='./templates/')
+templates = Jinja2Templates(directory='templates/')
 router = APIRouter()
 
 url = 'https://api.fda.gov/drug/label.json?'
@@ -28,3 +30,15 @@ async def root(request: Request):
 @doctor.get("/brands/")
 async def brands():
     return f"{brandList.text}"
+
+@doctor.post("/search", response_class=HTMLResponse)
+async def search(
+        request: Request,
+        hx_request: Annotated[str, Form()]):
+    if hx_request:
+        return templates.TemplateResponse(
+            request = request,
+            name = "search.html",
+            context = {"result": brandList.text}
+        )
+    return templates.TemplateResponse("search.html", {"request": request})

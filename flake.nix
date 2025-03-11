@@ -18,6 +18,7 @@
             (with pkgs.python313Packages; [
               pip
               requests
+              python-multipart
               jinja2
               fastapi
               fastapi-cli
