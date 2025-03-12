@@ -1,5 +1,7 @@
 import requests as r
 from typing import Annotated, Union
+from pydantic import BaseModel
+from pydantic_core import from_json
 from fastapi import FastAPI, APIRouter, Request, Header, Form
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.encoders import jsonable_encoder
@@ -32,8 +34,10 @@ async def root(request: Request):
 async def brands():
     return f"{brandList.text}"
 
-@doctor.get("/search")
-async def search(query: str):
+@doctor.get("/search", response_class=HTMLResponse)
+async def search(request: Request, query: str):
     rep = r.get(f'{url}{apiOp}openfda.brand_name:{query}{limit}')
-    #rep = jsonable_encoder(rep)
-    return f"{rep.text}"
+    medObj = from_json(rep.text)
+    medObj = medObj['results']
+    results = [val for val in medObj]
+    return templates.TemplateResponse(request=request, name="search.html", context= {"results": results})
