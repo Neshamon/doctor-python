@@ -1,20 +1,20 @@
 {% for result in results %}
-  <div class="backdrop-blur-sm bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-violet-200 hover:border-2 transition-colors duration-300">
+  <div class="backdrop-blur-sm bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-violet-200 hover:border-2 transition-colors duration-300" hx-get="/modal" hx-target="body" hx-swap="beforend" hx-trigger="click" hx-include="find p" hx-params="innerHTML" name="brand_name">
     <p class="text-xs overflow-auto hover:text-pretty min-h-4 max-h-60 font-semibold mb-4">{{ result['openfda']['brand_name'] }}</p>
   </div>
-<div class="backdrop-blur-sm bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-violet-200 hover:border-2 transition-colors duration-300">
+<div class="backdrop-blur-sm bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-violet-200 hover:border-2 transition-colors duration-300" hx-get="/modal" hx-target="body" hx-swap="beforend" hx-trigger="click" hx-include="find p" hx-params="innerHTML" name="generic_name">
   <p class="text-xs overflow-auto hover:text-pretty min-h-4 max-h-60 font-semibold mb-4">{{ result['openfda']['generic_name'] }}</p>
   </div>
-<div class="backdrop-blur-sm bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-violet-200 hover:border-2 transition-colors duration-300">
+<div class="backdrop-blur-sm bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-violet-200 hover:border-2 transition-colors duration-300" hx-get="/modal" hx-target="body" hx-swap="beforend" hx-trigger="click" hx-include="find p" hx-params="innerHTML" name="man_name">
   <p class="text-xs overflow-auto hover:text-pretty min-h-4 max-h-60 font-semibold mb-4">{{ result['openfda']['manufacturer_name'] }}</p>
   </div>
-<div class="backdrop-blur-sm bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-violet-200 hover:border-2 transition-colors duration-300">
+<div class="backdrop-blur-sm bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-violet-200 hover:border-2 transition-colors duration-300" hx-get="/modal" hx-target="body" hx-swap="beforend" hx-trigger="click" hx-include="find p" hx-params="innerHTML" name="purp">
   <p class="text-xs overflow-auto hover:text-pretty min-h-4 max-h-60 font-semibold mb-4">{{ result['purpose'] }}</p>
   </div>
-<div class="backdrop-blur-sm bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-violet-200 hover:border-2 transition-colors duration-300">
+<div class="backdrop-blur-sm bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-violet-200 hover:border-2 transition-colors duration-300" hx-get="/modal" hx-target="body" hx-swap="beforend" hx-trigger="click" hx-include="find p" hx-params="innerHTML" name="warnings">
   <p class="text-xs overflow-auto hover:text-pretty min-h-4 max-h-60 font-semibold mb-4">{{ result['warnings'] }}</p>
   </div>
-<div class="backdrop-blur-sm bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-violet-200 hover:border-2 transition-colors duration-300">
+<div class="backdrop-blur-sm bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-violet-200 hover:border-2 transition-colors duration-300" hx-get="/modal" hx-target="body" hx-swap="beforend" hx-trigger="click" hx-include="find p" hx-params="innerHTML" name="dos_admin">
   <p class="text-xs overflow-auto hover:text-pretty min-h-4 max-h-60 font-semibold mb-4">{{ result['dosage_and_administration'] }}</p>
 </div>
 {% endfor %}

@@ -1,8 +1,13 @@
 import requests as r
+
 from typing import Annotated, Union
+
 from pydantic import BaseModel
 from pydantic_core import from_json
-from fastapi import FastAPI, APIRouter, Request, Header, Form
+
+from sqlmodel import Field, Session, SQLModel, create_engine, select
+
+from fastapi import FastAPI, APIRouter, Request, Depends, Query, HTTPException
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.encoders import jsonable_encoder
 from fastapi.staticfiles import StaticFiles
@@ -41,3 +46,7 @@ async def search(request: Request, query: str):
     medObj = medObj['results']
     results = [val for val in medObj]
     return templates.TemplateResponse(request=request, name="search.html", context= {"results": results})
+
+@doctor.get("/modal", response_class=HTMLResponse)
+async def modal(request: Request, contentStr: str):
+    return templates.TemplateResponse(request=request, name="modal.html", context={"contentStr": contentStr})

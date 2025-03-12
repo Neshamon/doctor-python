@@ -20,6 +20,7 @@
               requests
               python-multipart
               jinja2
+              sqlmodel
               fastapi
               fastapi-cli
               tailwindcss_4
