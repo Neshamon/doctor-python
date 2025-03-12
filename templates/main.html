@@ -2,7 +2,7 @@
 
 {% block content %}
   <div class="bg-gradient-to-r from-violet-100 to-indigo-100 flex items-center justify-center h-screen">
-  <div class="w-11/12 sm:w-11/12 md:w-8/12 lg:w-6/12 backdrop-blur-sm bg-white/40 p-6 rounded-lg shadow-sm border-violet-200 border">
+  <div class="w-11/12 h-11/12 sm:w-11/12 md:w-8/12 lg:w-8/12 lg:h-8/12 backdrop-blur-sm bg-white/40 p-6 rounded-lg shadow-sm border-violet-200 border">
     <div class="w-full flex justify-between items-center p-3">
       <h2 class="text-xl font-semibold">Doctor Python</h2>
       <button id="openModalBtn" class="flex items-center bg-gradient-to-r from-violet-300 to-indigo-300  border border-fuchsia-00 hover:border-violet-100 text-white font-semibold py-2 px-4 rounded-md transition-colors duration-300">
@@ -14,22 +14,24 @@
     </div>
     <div class="w-full flex justify-center p-1 mb-4">
       <div class="relative w-full">
-        <input type="text" class="w-full backdrop-blur-sm bg-white/20 py-2 pl-10 pr-4 rounded-lg focus:outline-none border-2 border-gray-100 focus:border-violet-300 transition-colors duration-300" placeholder="Search..." name="query" hx-get="/search" hx-trigger="keyup changed delay:500ms" hx-target='#data-table' hx-swap="innerHTML">
+        <input type="text" class="w-full backdrop-blur-sm bg-white/20 py-2 pl-10 pr-4 rounded-lg focus:outline-none border-2 border-slate-400 focus:border-violet-300 transition-colors duration-300" placeholder="Search..." name="query" hx-get="/search" hx-trigger="keyup changed delay:500ms" hx-target='#data-table' hx-swap="innerHTML">
         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-          <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+          <svg class="w-4 h-4 text-gray-800 dark:text-black" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
           </svg>
         </div>
       </div>
     </div>
-    <div class="grid grid-cols-6 sm:grid-cols-6 md:grid-cols-6 lg:grid-cols-6 gap-4" id="data-table">
-      <!-- Here? -->
-      <div>Brand Name</div>
-      <div>Generic Name</div>
-      <div>Manufacturer Name</div>
-      <div>Purpose</div>
-      <div>Warnings</div>
-      <div>Dosage & Administration</div>
+    <!-- Grid -->
+    <div class="grid grid-cols-6 sm:grid-cols-6 md:grid-cols-6 lg:grid-cols-6 gap-4">
+      <div class="text-center text-sm font-semibold p-3">Brand Name</div>
+      <div class="text-center text-sm font-semibold p-3">Generic Name</div>
+      <div class="text-center text-sm font-semibold p-3">Manufacturer Name</div>
+      <div class="text-center text-sm font-semibold p-3">Purpose</div>
+      <div class="text-center text-sm font-semibold p-3">Warnings</div>
+      <div class="text-center text-sm font-semibold p-3">Dosage & Administration</div>
+    </div>
+    <div class="grid overflow-auto grid-cols-6 sm:grid-cols-6 md:grid-cols-6 lg:grid-cols-6 max-h-90 gap-4" id="data-table">
     </div>
   </div>
   <!-- Modal -->
