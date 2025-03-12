@@ -2,16 +2,17 @@ import requests as r
 from typing import Annotated, Union
 from fastapi import FastAPI, APIRouter, Request, Header, Form
 from fastapi.responses import HTMLResponse, JSONResponse
+from fastapi.encoders import jsonable_encoder
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 templates = Jinja2Templates(directory='templates/')
 router = APIRouter()
 
-url = 'https://api.fda.gov/drug/label.json?'
+url = 'https://api.fda.gov/drug/label.json'
 searchTerm = "a*"
 limit = "&limit=10"
-apiOp = "search="
+apiOp = "?search="
 brandList = r.get(f'{url}{apiOp}openfda.brand_name:{searchTerm}{limit}')
 genericList = r.get(f'{url}{apiOp}openfda.generic_name:{searchTerm}{limit}')
 manList = r.get(f'{url}{apiOp}openfda.manufacturer_name:{searchTerm}{limit}')
@@ -31,14 +32,8 @@ async def root(request: Request):
 async def brands():
     return f"{brandList.text}"
 
-@doctor.post("/search", response_class=HTMLResponse)
-async def search(
-        request: Request,
-        hx_request: Annotated[str, Form()]):
-    if hx_request:
-        return templates.TemplateResponse(
-            request = request,
-            name = "search.html",
-            context = {"result": brandList.text}
-        )
-    return templates.TemplateResponse("search.html", {"request": request})
+@doctor.get("/search")
+async def search(query: str):
+    rep = r.get(f'{url}{apiOp}openfda.brand_name:{query}{limit}')
+    #rep = jsonable_encoder(rep)
+    return f"{rep.text}"
