@@ -40,13 +40,13 @@
           default = pkgs.mkShell {
             venvDir = ".venv";
             packages =
-              with pkgs;
+              with self.pkgs;
               [
                 python313
                 sqlite
                 basedpyright
               ]
-              ++ (with pkgs.python313Packages; [
+              ++ (with self.pkgs.python313Packages; [
                 pip
                 requests
                 python-multipart
