@@ -26,12 +26,12 @@ doctor = FastAPI();
 doctor.mount("/static", StaticFiles(directory="static/"), name="static")
 
 class SearchHistory(SQLModel, table=True):
-    brand_name: list
-    generic_name: list
-    manufacturer_name: list
-    purpose: list
-    warnings: list
-    dosage_and_admin: list
+    brand_name: str | None = Field(None, primary_key=True)
+    generic_name: list[str] | None = Field(None, index=True)
+    manufacturer_name: list[str] | None = Field(None, index=True)
+    purpose: list[str] | None = Field(None, index=True)
+    warnings: list[str] | None = Field(None, index=True)
+    dosage_and_admin: list[str] | None = Field(None, index=True)
 
 doctorDb = create_engine("sqlite:///doctorDb.db", connect_args= {"check_same_thread": False})
 
