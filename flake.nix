@@ -31,6 +31,9 @@
       githubActions = nix-github-actions.lib.mkGithubMatrix {
         checks = nixpkgs.lib.getAttrs [ "x86_64-linux" "x86_64-darwin" ] self.checks;
       };
+      checks.x86_64-linux.hello = nixpkgs.legacyPackages.x86_64-linux.hello;
+      checks.x86_64-linux.default = self.packages.x86_64-linux.hello;
+
       devShells = forEachSupportedSystem (
         { pkgs }:
         {
