@@ -6,7 +6,7 @@
   inputs.nix-github-actions.inputs.nixpkgs.follows = "nixpkgs";
 
   outputs =
-    { self, nixpkgs }:
+    { self, nixpkgs, nix-github-actions }:
     let
       supportedSystems = [
         "x86_64-linux"
