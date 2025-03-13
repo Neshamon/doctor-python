@@ -35,18 +35,18 @@
       #packages.x86_64-linux.default = self.packages.x86_64-linux.hello;
 
       devShells = forEachSupportedSystem (
-        { pkgs }:
+        { self, pkgs }:
         {
-          default = pkgs.mkShell {
+          default = self.pkgs.mkShell {
             venvDir = ".venv";
             packages =
-              with self.pkgs;
+              with pkgs;
               [
                 python313
                 sqlite
                 basedpyright
               ]
-              ++ (with self.pkgs.python313Packages; [
+              ++ (with pkgs.python313Packages; [
                 pip
                 requests
                 python-multipart
