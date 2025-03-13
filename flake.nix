@@ -28,16 +28,10 @@
         );
     in
     {
-      githubActions = nix-github-actions.lib.mkGithubMatrix {
-        checks = nixpkgs.lib.getAttrs [ "x86_64-linux" ] self.packages;
-      };
-      #packages.x86_64-linux.hello = nixpkgs.legacyPackages.x86_64-linux.hello;
-      #packages.x86_64-linux.default = self.packages.x86_64-linux.hello;
-
       devShells = forEachSupportedSystem (
         { pkgs }:
         {
-          default = self.pkgs.mkShell {
+          default = pkgs.mkShell {
             venvDir = ".venv";
             packages =
               with pkgs;
@@ -59,6 +53,10 @@
                 celery
                 venvShellHook
               ]);
+            
+            #githubActions = nix-github-actions.lib.mkGithubMatrix {
+            #  checks = nixpkgs.lib.getAttrs [ "x86_64-linux" ] self.packages;
+            #};
           };
         }
       );
