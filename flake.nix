@@ -6,7 +6,11 @@
   inputs.nix-github-actions.inputs.nixpkgs.follows = "nixpkgs";
 
   outputs =
-    { self, nixpkgs, nix-github-actions }:
+    {
+      self,
+      nixpkgs,
+      nix-github-actions,
+    }:
     let
       supportedSystems = [
         "x86_64-linux"
@@ -24,7 +28,9 @@
         );
     in
     {
-      githubActions = nix-github-actions.lib.mkGithubMatrix { inherit (self) checks; };
+      githubActions = nix-github-actions.lib.mkGithubMatrix {
+        checks = nixpkgs.lib.getAttrs [ "x86_64-linux" "x86_64-darwin" ] self.checks;
+      };
       devShells = forEachSupportedSystem (
         { pkgs }:
         {
