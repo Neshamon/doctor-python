@@ -1,3 +1,4 @@
+from ntpath import exists
 import requests as r
 
 from typing import Annotated, Union
@@ -45,7 +46,8 @@ SessionDep = Annotated[Session, Depends(get_session)]
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    create_db_and_tables()
+    if not exists("./doctor.db"):
+        create_db_and_tables()
     yield
 
 doctor = FastAPI(lifespan=lifespan);
@@ -78,9 +80,12 @@ async def get_history(searchStr: str, session: SessionDep):
 async def search(request: Request, query: str):
     results = ''
     history = ''
-    with Session(doctorDb) as session:     
-        history = await get_history(query, session)
-        [print(item[0]) for item in history]
+    if query == '':
+        return
+    else:
+        with Session(doctorDb) as session:     
+            history = await get_history(query, session)
+            print(history)
 
     if not history:
         rep = r.get(f'{url}{apiOp}openfda.brand_name:{query}{limit}')
@@ -95,12 +100,12 @@ async def search(request: Request, query: str):
                 manufacturer_name=dataObj['openfda']['manufacturer_name'][0],
                 purpose=dataObj['purpose'][0] if dataObj.get('purpose') else '',
                 warnings=dataObj['warnings'][0] if dataObj.get('warnings') else '',
-                dosage_and_admin=dataObj['dosage_and_administration'][0] if dataObj.get('dosage_and_administration') else '',
+                dosage_and_admin=dataObj['dosage_and_administration'][0] if dataObj.get('dosage_and_administration') else ''
             ))
         with Session(doctorDb) as session:
             [await cache(item, session) for item in searchList]
     else:
-        print(history)
+        [print(item, "\n\n\n\n\n") for item in history]
         results = history
 
     return templates.TemplateResponse(request=request, name="search.html", context= {"results": results})
