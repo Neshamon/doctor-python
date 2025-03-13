@@ -29,7 +29,7 @@
     in
     {
       githubActions = nix-github-actions.lib.mkGithubMatrix {
-        checks = nixpkgs.lib.getAttrs [ "x86_64-linux" ] self.checks;
+        checks = nixpkgs.lib.getAttrs [ "x86_64-linux" ] self.packages;
       };
       packages.x86_64-linux.hello = nixpkgs.legacyPackages.x86_64-linux.hello;
       packages.x86_64-linux.default = self.packages.x86_64-linux.hello;
