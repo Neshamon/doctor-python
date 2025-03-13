@@ -31,6 +31,25 @@ doctor = FastAPI();
 
 doctor.mount("/static", StaticFiles(directory="static/"), name="static")
 
+class SearchHistory(SQLModel, table=True):
+    brand_name: list
+    generic_name: list
+    manufacturer_name: list
+    purpose: list
+    warnings: list
+    dosage_and_admin: list
+
+doctorDb = create_engine("sqlite:///doctorDb.db", connect_args= {"check_same_thread": False})
+
+def create_db_and_tables():
+    SQLModel.metadata.create_all(doctorDb)
+
+def get_session():
+    with Session(doctorDb) as session:
+        yield session
+
+SessionDep = Annotated[Session, Depends(get_session)]
+        
 @doctor.get("/")
 async def root(request: Request):
     return templates.TemplateResponse("main.html", {"request": request})
@@ -45,6 +64,7 @@ async def search(request: Request, query: str):
     medObj = from_json(rep.text)
     medObj = medObj['results']
     results = [val for val in medObj]
+    
     return templates.TemplateResponse(request=request, name="search.html", context= {"results": results})
 
 @doctor.get("/modal", response_class=HTMLResponse)
