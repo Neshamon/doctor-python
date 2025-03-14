@@ -1,14 +1,22 @@
 {% for result in results %}
-  <div class="backdrop-blur-sm bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-violet-200 hover:border-2 transition-colors duration-300 " hx-get="/modal" hx-target="body" hx-swap="beforend" hx-trigger="click" hx-include="find p" hx-params="innerHTML" id="brand_name">
+  <div class="backdrop-blur-sm bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-violet-200 hover:border-2 transition-colors duration-300 " hx-get="/modal?contentStr={% if results is mapping -%}
+      {{ result['openfda']['brand_name'] }}
+      {% else -%}
+      {{ result.brand_name }}
+      {% endif %}" hx-target="body" hx-swap="beforeend" hx-trigger="click" hx-include="find p">
     <p class="text-xs overflow-auto hover:text-pretty min-h-4 max-h-60 font-semibold mb-4">
       {% if results is mapping -%}
-      {{ result['openfda']['brand_name'] }}
+      {{ result['openfda']['brand_name'][0] }}
       {% else -%}
       {{ result.brand_name }}
       {% endif %}
     </p>
   </div>
-<div class="backdrop-blur-sm bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-violet-200 hover:border-2 transition-colors duration-300 " hx-get="/modal" hx-target="body" hx-swap="beforend" hx-trigger="click" hx-include="find p" hx-params="innerHTML" id="generic_name">
+<div class="backdrop-blur-sm bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-violet-200 hover:border-2 transition-colors duration-300 " hx-get="/modal?contentStr={% if results is mapping -%}
+      {{ result['openfda']['generic_name'] }}
+      {% else -%}
+      {{ result.generic_name }}
+      {% endif %}" hx-target="body" hx-swap="beforeend" hx-trigger="click" hx-include="find p">
   <p class="text-xs overflow-auto hover:text-pretty min-h-4 max-h-60 font-semibold mb-4">
     {% if results is mapping -%}
     {{ result['openfda']['generic_name'] }}
@@ -17,7 +25,11 @@
     {% endif %}
   </p>
   </div>
-<div class="backdrop-blur-sm bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-violet-200 hover:border-2 transition-colors duration-300 " hx-get="/modal" hx-target="body" hx-swap="beforend" hx-trigger="click" hx-include="find p" hx-params="innerHTML" id="man_name">
+<div class="backdrop-blur-sm bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-violet-200 hover:border-2 transition-colors duration-300 " hx-get="/modal?contentStr={% if results is mapping -%}
+      {{ result['openfda']['manufacturer_name'] }}
+      {% else -%}
+      {{ result.manufacturer_name }}
+      {% endif %}" hx-target="body" hx-swap="beforeend" hx-trigger="click" hx-include="find p">
   <p class="text-xs overflow-auto hover:text-pretty min-h-4 max-h-60 font-semibold mb-4">
     {% if results is mapping -%}
     {{ result['openfda']['manufacturer_name'] }}
@@ -26,7 +38,11 @@
     {% endif %}
   </p>
   </div>
-<div class="backdrop-blur-sm bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-violet-200 hover:border-2 transition-colors duration-300 " hx-get="/modal" hx-target="body" hx-swap="beforend" hx-trigger="click" hx-include="find p" hx-params="innerHTML" id="purp">
+<div class="backdrop-blur-sm bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-violet-200 hover:border-2 transition-colors duration-300 " hx-get="/modal?contentStr={% if results is mapping -%}
+      {{ result['purpose'] }}
+      {% else -%}
+      {{ result.purpose }}
+      {% endif %}" hx-target="body" hx-swap="beforeend" hx-trigger="click" hx-include="find p">
   <p class="text-xs overflow-auto hover:text-pretty min-h-4 max-h-60 font-semibold mb-4">
     {% if results is mapping -%}
     {{ result['purpose'] }}
@@ -35,7 +51,11 @@
     {% endif %}
   </p>
   </div>
-<div class="backdrop-blur-sm bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-violet-200 hover:border-2 transition-colors duration-300 " hx-get="/modal" hx-target="body" hx-swap="beforend" hx-trigger="click" hx-include="find p" hx-params="innerHTML" id="warnings">
+<div class="backdrop-blur-sm bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-violet-200 hover:border-2 transition-colors duration-300 " hx-get="/modal?contentStr={% if results is mapping -%}
+      {{ result['warnings'] }}
+      {% else -%}
+      {{ result.warnings }}
+      {% endif %}" hx-target="body" hx-swap="beforeend" hx-trigger="click" hx-include="find p">
   <p class="text-xs overflow-auto hover:text-pretty min-h-4 max-h-60 font-semibold mb-4">
     {% if results is mapping -%}
     {{ result['warnings'] }}
@@ -44,7 +64,11 @@
     {% endif %}
   </p>
   </div>
-<div class="backdrop-blur-sm bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-violet-200 hover:border-2 transition-colors duration-300 " hx-get="/modal" hx-target="body" hx-swap="beforend" hx-trigger="click" hx-include="find p" hx-params="innerHTML" id="dos_admin">
+<div class="backdrop-blur-sm bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-violet-200 hover:border-2 transition-colors duration-300 " hx-get="/modal?contentStr={% if results is mapping -%}
+      {{ result['dosage_and_administration'] }}
+      {% else -%}
+      {{ result.dosage_and_admin }}
+      {% endif %}" hx-target="body" hx-swap="beforeend" hx-trigger="click" hx-include="find p">
   <p class="text-xs overflow-auto hover:text-pretty min-h-4 max-h-60 font-semibold mb-4">
     {% if results is mapping -%}
     {{ result['dosage_and_administration'] }}
