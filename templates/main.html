@@ -19,16 +19,12 @@
     </div>
     <!-- Grid -->
     <div class="grid bg-gradient-to-r from-violet-300/15 to-indigo-300/15 rounded-xl grid-cols-6 sm:grid-cols-6 md:grid-cols-6 lg:grid-cols-6 p-3 gap-4">
-      <script>
-function hide(){ var test = document.querySelectorAll("#brand_name"); test.classList.toggle("hidden");}
-      </script>
-      <div class="text-center uppercase text-xs font-semibold"
-        onClick="hide()" hx-vals="{'name': brand_name}">Brand Name</div>
-      <div class="text-center uppercase text-xs font-semibold" hx-trigger="click" hx-vals="{'name': generic_name}">Generic Name</div>
-      <div class="text-center uppercase text-xs font-semibold" hx-trigger="click" hx-vals="{'name': man_name}">Manufacturer Name</div>
-      <div class="text-center uppercase text-xs font-semibold" hx-trigger="click" hx-vals="{'name': purp}">Purpose</div>
-      <div class="text-center uppercase text-xs font-semibold" hx-trigger="click" hx-vals="{'name': warnings}">Warnings</div>
-      <div class="text-center uppercase text-xs font-semibold" hx-trigger="click" hx-vals="{'name': dos_admin}">Dosage & Administration</div>
+      <div class="text-center uppercase text-xs font-semibold" hx-trigger="click">Brand Name</div>
+      <div class="text-center uppercase text-xs font-semibold" hx-trigger="click">Generic Name</div>
+      <div class="text-center uppercase text-xs font-semibold" hx-trigger="click">Manufacturer Name</div>
+      <div class="text-center uppercase text-xs font-semibold" hx-trigger="click">Purpose</div>
+      <div class="text-center uppercase text-xs font-semibold" hx-trigger="click">Warnings</div>
+      <div class="text-center uppercase text-xs font-semibold" hx-trigger="click">Dosage & Administration</div>
     </div>
     <div class="grid overflow-auto grid-cols-6 sm:grid-cols-6 md:grid-cols-6 lg:grid-cols-6 max-h-100 gap-4 text-center" id="data-table">
     </div>

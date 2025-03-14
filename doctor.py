@@ -73,7 +73,6 @@ async def get_history(searchStr: str, session: SessionDep):
     queryResults = query.all()
     if not query:
         return False
-    print(queryResults)
     return queryResults
     
 @doctor.get("/search", response_class=HTMLResponse)
@@ -93,7 +92,6 @@ async def search(request: Request, query: str):
         medObj = medObj['results']
         results = [val for val in medObj]
         searchList = []
-        print(results, "---------\n\n\n\n\n\n")
         for dataObj in results:
             searchList.append(SearchHistory(
                 brand_name=dataObj['openfda']['brand_name'][0] if dataObj.get('openfda') else 'No Data',
@@ -105,11 +103,9 @@ async def search(request: Request, query: str):
             ))
         
         with Session(doctorDb) as session:
-            #results = [session.exec(select(table)).all() for table in searchList]
-            #print(results)
             [await cache(item, session) for item in searchList]
     else:
-        [print(item, "\n\n\n\n\n") for item in history]
+        #[print(item, "\n\n\n\n\n") for item in history]
         results = history
 
     return templates.TemplateResponse(request=request, name="search.html", context= {"results": results})
