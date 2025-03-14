@@ -1,9 +1,8 @@
 from ntpath import exists
 import requests as r
 
-from typing import Annotated, Union
+from typing import Annotated
 
-from pydantic import BaseModel
 from pydantic_core import from_json
 
 from sqlmodel import Field, Session, SQLModel, create_engine, select
@@ -62,7 +61,6 @@ async def root(request: Request):
 
 @doctor.post("/cache")
 async def cache(doc: SearchHistory, session: SessionDep):
-    print(doc)
     session.add(doc)
     session.commit()
     session.refresh(doc)
@@ -93,9 +91,9 @@ async def search(request: Request, query: str):
         rep = r.get(f'{url}{apiOp}openfda.brand_name:{query}{limit}')
         medObj = from_json(rep.text)
         medObj = medObj['results']
-        tmpList = [val for val in medObj]
+        results = [val for val in medObj]
         searchList = []
-        for dataObj in tmpList:
+        for dataObj in results:
             searchList.append(SearchHistory(
                 brand_name=dataObj['openfda']['brand_name'][0] if dataObj.get('openfda') else 'No Data',
                 generic_name=dataObj['openfda']['generic_name'][0] if dataObj.get('openfda') else 'No Data',
@@ -104,7 +102,7 @@ async def search(request: Request, query: str):
                 warnings=dataObj['warnings'][0] if dataObj.get('warnings') else 'No Data',
                 dosage_and_admin=dataObj['dosage_and_administration'][0] if dataObj.get('dosage_and_administration') else 'No Data'
             ))
-        results = searchList
+        
         with Session(doctorDb) as session:
             [await cache(item, session) for item in searchList]
     else:
