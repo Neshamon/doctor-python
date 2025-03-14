@@ -52,8 +52,6 @@ doctor = FastAPI(lifespan=lifespan);
 
 doctor.mount("/static", StaticFiles(directory="static/"), name="static")
 
-hiddenList = []
-
 @doctor.get("/")
 async def root(request: Request):
     return templates.TemplateResponse("main.html", {"request": request})
@@ -63,6 +61,7 @@ async def cache(doc: SearchHistory, session: SessionDep):
     session.add(doc)
     session.commit()
     session.refresh(doc)
+    print("\nResponse Cached!\n")
     return doc
 
 @doctor.get("/history")
@@ -71,6 +70,7 @@ async def get_history(searchStr: str, session: SessionDep):
     query = session.exec(statement)
     queryResults = query.all()
     if not query:
+        print("\nQuery not found.\n")
         return False
     return queryResults
     
@@ -83,7 +83,6 @@ async def search(request: Request, query: str):
     else:
         with Session(doctorDb) as session:     
             history = await get_history(query, session)
-            print(history)
 
     if not history:
         rep = r.get(f'{url}{apiOp}openfda.brand_name:{query}{limit}')
