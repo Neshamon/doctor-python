@@ -19,7 +19,6 @@ templates = Jinja2Templates(directory='templates/')
 router = APIRouter()
 
 url = 'https://api.fda.gov/drug/label.json'
-searchTerm = "a*"
 limit = "&limit=10"
 apiOp = "?search="
 
