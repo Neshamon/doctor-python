@@ -93,6 +93,7 @@ async def search(request: Request, query: str):
         medObj = medObj['results']
         results = [val for val in medObj]
         searchList = []
+        print(results, "---------\n\n\n\n\n\n")
         for dataObj in results:
             searchList.append(SearchHistory(
                 brand_name=dataObj['openfda']['brand_name'][0] if dataObj.get('openfda') else 'No Data',
