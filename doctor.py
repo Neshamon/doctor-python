@@ -104,6 +104,8 @@ async def search(request: Request, query: str):
             ))
         
         with Session(doctorDb) as session:
+            #results = [session.exec(select(table)).all() for table in searchList]
+            #print(results)
             [await cache(item, session) for item in searchList]
     else:
         [print(item, "\n\n\n\n\n") for item in history]
